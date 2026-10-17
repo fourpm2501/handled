@@ -1,0 +1,11 @@
+import { defineSchema, defineTable } from 'convex/server';
+import { v } from 'convex/values';
+export const message = v.object({role:v.union(v.literal('customer'),v.literal('fresher')),text:v.string(),at:v.number(),responseMs:v.optional(v.number()),timedOut:v.optional(v.boolean())});
+export const score = v.object({score:v.number(),quote:v.string(),reason:v.string()});
+export const grade = v.object({tone:score,accuracy:score,resolution:score});
+export const scenario = v.union(v.literal('quickbite'),v.literal('bugticket'));
+export const bugGrade = v.object({questions:score,cause:score,fix:score,explanation:score});
+export const roleId = v.union(v.literal('software'),v.literal('data'));
+export const caseId = v.union(v.literal('SWE-1'),v.literal('SWE-2'),v.literal('BUGTICKET'),v.literal('DATA-1'),v.literal('DATA-2'),v.literal('DATA-3'));
+export const caseGrade = v.array(v.object({label:v.string(),score:v.number(),quote:v.string(),reason:v.string()}));
+export default defineSchema({officerAccessLimits:defineTable({started:v.number(),attempts:v.number()}),sessions:defineTable({seniorNote:v.optional(v.string()),seniorNoteVersion:v.optional(v.number()),token:v.string(),owner:v.string(),name:v.optional(v.string()),factsheet:v.string(),scenario:v.optional(scenario),messages:v.array(message),status:v.union(v.literal('customer'),v.literal('reply'),v.literal('grading'),v.literal('complete'),v.literal('error')),replyStartedAt:v.optional(v.number()),errorStage:v.optional(v.union(v.literal('customer'),v.literal('grading'))),grade:v.optional(grade),bugGrade:v.optional(bugGrade),graderRaw:v.optional(v.string()),lease:v.optional(v.string()),leaseAt:v.optional(v.number()),roleId:v.optional(roleId),caseId:v.optional(caseId),runToken:v.optional(v.string()),nextToken:v.optional(v.string()),deadlineAt:v.optional(v.number()),awaitingFix:v.optional(v.boolean()),caseGrade:v.optional(caseGrade)}).index('by_token',['token']).index('by_status',['status']).index('by_run',['runToken'])});

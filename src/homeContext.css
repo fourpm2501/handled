@@ -1,0 +1,8 @@
+.home-app .home-context{max-width:968px;margin:0 auto;padding:24px 24px 16px;text-align:left;color:var(--white)}
+.home-app .home-context h2{font-size:24px;font-weight:600;line-height:1.25}
+.home-app .home-context dl{margin:28px 0 0;display:grid;gap:20px}
+.home-app .home-context dl>div{background:var(--paper);color:var(--ink);border:1px solid var(--border);border-radius:12px;padding:28px}
+.home-app .home-context dt{color:var(--orange-text);text-transform:uppercase;font-size:13px;font-weight:600;line-height:1.5;margin-bottom:12px}
+.home-app .home-context dd{font-size:16px;line-height:1.6;margin:0}
+@media(min-width:760px){.home-app .home-context dl{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:480px){.home-app .home-context{padding:16px 20px 24px}.home-app .home-context dl{margin-top:24px}.home-app .home-context dl>div{padding:16px}}
